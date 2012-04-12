@@ -4,5 +4,9 @@ import no.runsafe.framework.messaging.MessagePump;
 
 public class RunsafeMessageBus extends MessagePump
 {
-	// No code needed at this time
+    @Override
+    protected void PluginSetup()
+    {
+        //No code needed
+    }
 }
