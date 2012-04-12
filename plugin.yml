@@ -1,4 +1,5 @@
 name: RunsafeMessageBus
+load: STARTUP
 main: no.runsafe.RunsafeMessageBus
 version: 1.0
 author: Morten Nilsen

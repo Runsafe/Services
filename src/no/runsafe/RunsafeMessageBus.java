@@ -10,6 +10,9 @@ public class RunsafeMessageBus extends RunsafePlugin implements IPumpProvider
 	@Override
 	protected void PluginSetup()
 	{
+		//IOutput debugger = getComponent(IOutput.class);
+		//debugger.setDebugLevel(Level.FINE);
+		//this.addComponent(new MessagePumpDebugger(debugger));
 		this.addComponent(new MessagePump());
 	}
 
