@@ -2,9 +2,10 @@ package no.runsafe;
 
 import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.framework.messaging.IMessagePump;
+import no.runsafe.framework.messaging.IPumpProvider;
 import no.runsafe.framework.messaging.MessagePump;
 
-public class RunsafeMessageBus extends RunsafePlugin
+public class RunsafeMessageBus extends RunsafePlugin implements IPumpProvider
 {
 	@Override
 	protected void PluginSetup()
