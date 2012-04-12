@@ -1,0 +1,6 @@
+name: RunsafeMessageBus
+main: no.runsafe.RunsafeMessageBus
+version: 1.0
+author: Morten Nilsen
+depend: []
+description: Message Bus Plugin for the Runsafe plugin framework
