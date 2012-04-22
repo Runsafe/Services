@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/RunsafeMessageBus.iml" filepath="$PROJECT_DIR$/RunsafeMessageBus.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RunsafeServices.iml" filepath="$PROJECT_DIR$/RunsafeServices.iml" />
     </modules>
   </component>
 </project>

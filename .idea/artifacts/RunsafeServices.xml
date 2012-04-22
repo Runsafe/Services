@@ -1,12 +1,12 @@
 <component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="RunsafeMessageBus">
+  <artifact type="jar" build-on-make="true" name="RunsafeServices">
     <output-path>$PROJECT_DIR$/out/</output-path>
     <root id="archive" name="RunsafeMessageBus.jar">
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
       </element>
       <element id="file-copy" path="$PROJECT_DIR$/plugin.yml" />
-      <element id="module-output" name="RunsafeMessageBus" />
+      <element id="module-output" name="RunsafeServices" />
     </root>
   </artifact>
 </component>

@@ -1,7 +1,16 @@
 name: RunsafeMessageBus
 load: STARTUP
-main: no.runsafe.RunsafeMessageBus
+main: no.runsafe.RunsafeServices
 version: 1.0
-author: Morten Nilsen
+authors: [mortenn, Kruithne]
 depend: []
 description: Message Bus Plugin for the Runsafe plugin framework
+commands:
+  runsafe:
+    description: Manage runsafe plugins
+    aliases: [rs]
+
+permissions:
+  runsafe.config.reload:
+    description: Access to reload configuration
+    default: false
