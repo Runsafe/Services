@@ -1,25 +1,26 @@
-package no.runsafe.command.config;
+package no.runsafe;
 
 import no.runsafe.framework.command.RunsafeCommand;
 import no.runsafe.framework.messaging.IMessagePump;
 import no.runsafe.framework.messaging.Message;
+import no.runsafe.framework.server.player.RunsafePlayer;
 
-public class ReloadCommand extends RunsafeCommand
+public class ReloadConfigCommand extends RunsafeCommand
 {
-	public ReloadCommand(IMessagePump pump)
+	public ReloadConfigCommand(IMessagePump pump)
 	{
 		super("reload", null);
 		messagePump = pump;
 	}
 
 	@Override
-	public boolean Execute(String[] args)
+	public String OnExecute(RunsafePlayer executor, String[] args)
 	{
 		Message reloadConfigMessage = new Message();
 		reloadConfigMessage.setTargetService("Configuration");
 		reloadConfigMessage.setQuestion("config.reload");
 		messagePump.HandleMessageAll(reloadConfigMessage);
-		return true;
+		return "Configuration reloaded";
 	}
 
 	private IMessagePump messagePump;
