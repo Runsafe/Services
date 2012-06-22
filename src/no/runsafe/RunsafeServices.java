@@ -8,11 +8,9 @@ import no.runsafe.framework.messaging.MessagePump;
 import no.runsafe.framework.output.Console;
 import no.runsafe.framework.output.IOutput;
 
-public class RunsafeServices extends RunsafePlugin implements IPumpProvider
-{
+public class RunsafeServices extends RunsafePlugin implements IPumpProvider {
 	@Override
-	protected void PluginSetup()
-	{
+	protected void PluginSetup() {
 		this.addComponent(new MessagePump());
 		RunsafeCommand command = new RunsafeCommand("runsafe", null);
 
@@ -27,8 +25,7 @@ public class RunsafeServices extends RunsafePlugin implements IPumpProvider
 		Console.setWriter(getComponent(IOutput.class));
 	}
 
-	public IMessagePump getInstance()
-	{
+	public IMessagePump getInstance() {
 		return getComponent(IMessagePump.class);
 	}
 }
