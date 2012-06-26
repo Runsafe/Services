@@ -20,5 +20,5 @@ public class ReloadConfigCommand extends RunsafeCommand {
 		return "Configuration reloaded";
 	}
 
-	private IMessagePump messagePump;
+	private final IMessagePump messagePump;
 }

@@ -32,5 +32,5 @@ public class MessagePumpDebugger extends MessagePump {
 		return response;
 	}
 
-	private IOutput output;
+	private final IOutput output;
 }

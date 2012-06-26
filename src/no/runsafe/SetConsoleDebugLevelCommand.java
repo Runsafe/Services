@@ -27,5 +27,5 @@ public class SetConsoleDebugLevelCommand extends RunsafeConsoleCommand {
 		return String.format("Debug level is now %s.", output.getDebugLevel().getName());
 	}
 
-	private IOutput output;
+	private final IOutput output;
 }
