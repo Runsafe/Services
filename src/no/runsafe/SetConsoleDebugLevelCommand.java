@@ -1,6 +1,7 @@
 package no.runsafe;
 
 
+import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.framework.command.RunsafeConsoleCommand;
 import no.runsafe.framework.output.IOutput;
 import no.runsafe.framework.server.player.RunsafePlayer;
@@ -23,7 +24,9 @@ public class SetConsoleDebugLevelCommand extends RunsafeConsoleCommand {
 
 	@Override
 	public String OnExecute(RunsafePlayer executor, String[] args) {
-		output.setDebugLevel(Level.parse(getArg("level")));
+		for(RunsafePlugin plugin : RunsafePlugin.Instances.values())
+			plugin.getComponent(IOutput.class).setDebugLevel(Level.parse(getArg("level")));
+
 		return String.format("Debug level is now %s.", output.getDebugLevel().getName());
 	}
 
