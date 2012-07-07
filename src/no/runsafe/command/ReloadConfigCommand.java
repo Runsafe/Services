@@ -1,4 +1,4 @@
-package no.runsafe;
+package no.runsafe.command;
 
 import no.runsafe.framework.command.RunsafeCommand;
 import no.runsafe.framework.messaging.IMessagePump;

@@ -1,4 +1,4 @@
-package no.runsafe;
+package no.runsafe.command;
 
 
 import no.runsafe.framework.RunsafePlugin;
