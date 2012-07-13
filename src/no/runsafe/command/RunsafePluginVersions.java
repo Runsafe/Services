@@ -21,7 +21,7 @@ public class RunsafePluginVersions extends RunsafeCommand {
 	public String OnExecute(RunsafePlayer executor, String[] args) {
 		StringBuilder result = new StringBuilder();
 		for(String plugin : RunsafePlugin.Instances.keySet())
-			result.append(String.format("%s - %s\n", plugin, RunsafePlugin.Instances.get(plugin).getDescription().getVersion()));
+			result.append(String.format("%s %s\n", plugin, RunsafePlugin.Instances.get(plugin).getDescription().getVersion()));
 
 		return result.toString();
 	}
