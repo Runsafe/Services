@@ -1,9 +1,6 @@
 package no.runsafe;
 
-import no.runsafe.framework.database.IDatabase;
-import no.runsafe.framework.database.IRepository;
-import no.runsafe.framework.database.ISchemaUpdater;
-import no.runsafe.framework.database.SchemaRevisionRepository;
+import no.runsafe.framework.database.*;
 import no.runsafe.framework.event.player.IPlayerJoinEvent;
 import no.runsafe.framework.event.player.IPlayerQuitEvent;
 import no.runsafe.framework.output.IOutput;
@@ -15,40 +12,40 @@ import org.bukkit.entity.Player;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
-public class PlayerDatabase implements ISchemaUpdater, IPlayerJoinEvent, IPlayerQuitEvent, IRepository<PlayerData, String> {
-	public PlayerDatabase(SchemaRevisionRepository revisionRepository, IOutput console, IDatabase database) {
-		repository = revisionRepository;
+public class PlayerDatabase implements ISchemaChanges, IPlayerJoinEvent, IPlayerQuitEvent, IRepository<PlayerData, String> {
+	public PlayerDatabase(IOutput console, IDatabase database) {
 		this.console = console;
 		this.database = database;
 	}
 
 	@Override
-	public void Run() {
-		int revision = repository.getRevision("player_db");
-		if(revision < 1) {
-			console.write("Creating table player_db");
-			PreparedStatement create = database.prepare(
-					"CREATE TABLE player_db (" +
-							"`name` varchar(255) NOT NULL," +
-							"`joined` datetime NOT NULL," +
-							"`login` datetime NOT NULL," +
-							"`logout` datetime NULL," +
-							"`banned` datetime NULL," +
-							"`ban_reason` varchar(255) NULL," +
-							"`ban_by` varchar(255) NULL," +
-							"`ip` int unsigned NULL," +
-							"PRIMARY KEY(`name`)" +
-					")"
-			);
-			try {
-				create.execute();
-				revision = 1;
-			} catch(SQLException e) {
-				e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-			}
-		}
-		repository.setRevision("player_db", revision);
+	public String getTableName() {
+		return "player_db";
+	}
+
+	@Override
+	public HashMap<Integer, List<String>> getSchemaUpdateQueries() {
+		HashMap<Integer, List<String>> queries = new HashMap<Integer, List<String>>();
+		ArrayList<String> sql = new ArrayList<String>();
+		sql.add(
+				"CREATE TABLE player_db (" +
+						"`name` varchar(255) NOT NULL," +
+						"`joined` datetime NOT NULL," +
+						"`login` datetime NOT NULL," +
+						"`logout` datetime NULL," +
+						"`banned` datetime NULL," +
+						"`ban_reason` varchar(255) NULL," +
+						"`ban_by` varchar(255) NULL," +
+						"`ip` int unsigned NULL," +
+						"PRIMARY KEY(`name`)" +
+				")"
+		);
+		queries.put(1, sql);
+		return queries;
 	}
 
 	@Override
@@ -118,7 +115,6 @@ public class PlayerDatabase implements ISchemaUpdater, IPlayerJoinEvent, IPlayer
 		throw new UnsupportedOperationException("Not implemented");
 	}
 
-	private SchemaRevisionRepository repository;
 	private IOutput console;
 	private IDatabase database;
 }
