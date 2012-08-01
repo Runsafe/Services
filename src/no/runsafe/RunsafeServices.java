@@ -1,9 +1,6 @@
 package no.runsafe;
 
-import no.runsafe.command.EssentialsPlayers;
-import no.runsafe.command.ReloadConfigCommand;
-import no.runsafe.command.RunsafePluginVersions;
-import no.runsafe.command.SetConsoleDebugLevelCommand;
+import no.runsafe.command.*;
 import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.framework.command.RunsafeCommand;
 import no.runsafe.framework.configuration.IConfiguration;
@@ -37,6 +34,7 @@ public class RunsafeServices extends RunsafePlugin implements IPumpProvider, ICo
 		imports.addSubCommand(getInstance(EssentialsPlayers.class));
 
 		command.addSubCommand(imports);
+		command.addSubCommand(new DebugCommand());
 
 		addComponent(command);
 
