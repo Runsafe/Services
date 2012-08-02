@@ -4,45 +4,56 @@ import no.runsafe.framework.database.RunsafeEntity;
 
 import java.sql.Date;
 
-public class PlayerData extends RunsafeEntity {
+public class PlayerData extends RunsafeEntity
+{
 
-	public String getName() {
+	public String getName()
+	{
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name)
+	{
 		this.name = name;
 	}
 
-	public Date getJoined() {
+	public Date getJoined()
+	{
 		return joined;
 	}
 
-	public void setJoined(Date joined) {
+	public void setJoined(Date joined)
+	{
 		this.joined = joined;
 	}
 
-	public Date getLogin() {
+	public Date getLogin()
+	{
 		return login;
 	}
 
-	public void setLogin(Date login) {
+	public void setLogin(Date login)
+	{
 		this.login = login;
 	}
 
-	public Date getLogout() {
+	public Date getLogout()
+	{
 		return logout;
 	}
 
-	public void setLogout(Date logout) {
+	public void setLogout(Date logout)
+	{
 		this.logout = logout;
 	}
 
-	public Date getBanned() {
+	public Date getBanned()
+	{
 		return banned;
 	}
 
-	public void setBanned(Date banned) {
+	public void setBanned(Date banned)
+	{
 		this.banned = banned;
 	}
 

@@ -1,13 +1,13 @@
 package no.runsafe;
 
-import no.runsafe.framework.database.*;
+import no.runsafe.framework.database.IDatabase;
+import no.runsafe.framework.database.IRepository;
+import no.runsafe.framework.database.ISchemaChanges;
 import no.runsafe.framework.event.player.IPlayerJoinEvent;
 import no.runsafe.framework.event.player.IPlayerQuitEvent;
 import no.runsafe.framework.output.IOutput;
-import no.runsafe.framework.server.RunsafeServer;
 import no.runsafe.framework.server.event.player.RunsafePlayerJoinEvent;
 import no.runsafe.framework.server.event.player.RunsafePlayerQuitEvent;
-import org.bukkit.entity.Player;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,32 +16,36 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class PlayerDatabase implements ISchemaChanges, IPlayerJoinEvent, IPlayerQuitEvent, IRepository<PlayerData, String> {
-	public PlayerDatabase(IOutput console, IDatabase database) {
+public class PlayerDatabase implements ISchemaChanges, IPlayerJoinEvent, IPlayerQuitEvent, IRepository<PlayerData, String>
+{
+	public PlayerDatabase(IOutput console, IDatabase database)
+	{
 		this.console = console;
 		this.database = database;
 	}
 
 	@Override
-	public String getTableName() {
+	public String getTableName()
+	{
 		return "player_db";
 	}
 
 	@Override
-	public HashMap<Integer, List<String>> getSchemaUpdateQueries() {
+	public HashMap<Integer, List<String>> getSchemaUpdateQueries()
+	{
 		HashMap<Integer, List<String>> queries = new HashMap<Integer, List<String>>();
 		ArrayList<String> sql = new ArrayList<String>();
 		sql.add(
-				"CREATE TABLE player_db (" +
-						"`name` varchar(255) NOT NULL," +
-						"`joined` datetime NOT NULL," +
-						"`login` datetime NOT NULL," +
-						"`logout` datetime NULL," +
-						"`banned` datetime NULL," +
-						"`ban_reason` varchar(255) NULL," +
-						"`ban_by` varchar(255) NULL," +
-						"`ip` int unsigned NULL," +
-						"PRIMARY KEY(`name`)" +
+			"CREATE TABLE player_db (" +
+				"`name` varchar(255) NOT NULL," +
+				"`joined` datetime NOT NULL," +
+				"`login` datetime NOT NULL," +
+				"`logout` datetime NULL," +
+				"`banned` datetime NULL," +
+				"`ban_reason` varchar(255) NULL," +
+				"`ban_by` varchar(255) NULL," +
+				"`ip` int unsigned NULL," +
+				"PRIMARY KEY(`name`)" +
 				")"
 		);
 		queries.put(1, sql);
@@ -49,18 +53,22 @@ public class PlayerDatabase implements ISchemaChanges, IPlayerJoinEvent, IPlayer
 	}
 
 	@Override
-	public void OnPlayerJoinEvent(RunsafePlayerJoinEvent event) {
+	public void OnPlayerJoinEvent(RunsafePlayerJoinEvent event)
+	{
 		console.fine("Updating player_db with login time");
 		PreparedStatement update = database.prepare(
-				"INSERT INTO player_db (`name`,`joined`,`login`,`ip`) VALUES (?,NOW(),NOW(),INET_ATON(?))" +
-						"ON DUPLICATE KEY UPDATE `login`=VALUES(`login`), `ip`=VALUES(`ip`)"
+			"INSERT INTO player_db (`name`,`joined`,`login`,`ip`) VALUES (?,NOW(),NOW(),INET_ATON(?))" +
+				"ON DUPLICATE KEY UPDATE `login`=VALUES(`login`), `ip`=VALUES(`ip`)"
 		);
-		try {
+		try
+		{
 			update.setString(1, event.getPlayer().getName());
 			update.setString(2, event.getPlayer().getRawPlayer().getAddress().getAddress().getHostAddress());
 			update.executeUpdate();
 			console.fine("Finished updating player_db with login time");
-		} catch(SQLException e) {
+		}
+		catch (SQLException e)
+		{
 			e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
 		}
 	}
@@ -72,25 +80,30 @@ public class PlayerDatabase implements ISchemaChanges, IPlayerJoinEvent, IPlayer
 		PreparedStatement update = database.prepare(
 			"UPDATE player_db SET `logout`=NOW() WHERE `name`=?"
 		);
-		try {
+		try
+		{
 			update.setString(1, event.getPlayer().getName());
 			update.executeUpdate();
 			console.fine("Finished updating player_db with logout time");
-		} catch(SQLException e) {
+		}
+		catch (SQLException e)
+		{
 			e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
 		}
 	}
 
 	@Override
-	public PlayerData get(String player) {
+	public PlayerData get(String player)
+	{
 		PlayerData result = null;
 		PreparedStatement select = database.prepare(
 			"SELECT name, joined, login, logout, banned FROM player_db WHERE name=?"
 		);
-		try {
+		try
+		{
 			select.setString(1, player);
 			ResultSet data = select.executeQuery();
-			if(data.first())
+			if (data.first())
 			{
 				result = new PlayerData();
 				result.setName(data.getString(1));
@@ -99,19 +112,23 @@ public class PlayerDatabase implements ISchemaChanges, IPlayerJoinEvent, IPlayer
 				result.setLogout(data.getDate(4));
 				result.setBanned(data.getDate(5));
 			}
-		} catch(SQLException e) {
+		}
+		catch (SQLException e)
+		{
 			console.write(e.getMessage());
 		}
 		return result;
 	}
 
 	@Override
-	public void persist(PlayerData data) {
+	public void persist(PlayerData data)
+	{
 		throw new UnsupportedOperationException("Not implemented");
 	}
 
 	@Override
-	public void delete(PlayerData data) {
+	public void delete(PlayerData data)
+	{
 		throw new UnsupportedOperationException("Not implemented");
 	}
 

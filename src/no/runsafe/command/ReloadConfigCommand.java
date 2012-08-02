@@ -5,14 +5,17 @@ import no.runsafe.framework.messaging.IMessagePump;
 import no.runsafe.framework.messaging.Message;
 import no.runsafe.framework.server.player.RunsafePlayer;
 
-public class ReloadConfigCommand extends RunsafeCommand {
-	public ReloadConfigCommand(IMessagePump pump) {
+public class ReloadConfigCommand extends RunsafeCommand
+{
+	public ReloadConfigCommand(IMessagePump pump)
+	{
 		super("reload", null);
 		messagePump = pump;
 	}
 
 	@Override
-	public String OnExecute(RunsafePlayer executor, String[] args) {
+	public String OnExecute(RunsafePlayer executor, String[] args)
+	{
 		Message reloadConfigMessage = new Message();
 		reloadConfigMessage.setTargetService("Configuration");
 		reloadConfigMessage.setQuestion("config.reload");

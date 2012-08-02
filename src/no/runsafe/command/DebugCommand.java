@@ -8,21 +8,28 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
-public class DebugCommand extends RunsafeCommand {
-	public DebugCommand() {
+public class DebugCommand extends RunsafeCommand
+{
+	public DebugCommand()
+	{
 		super("debug", null);
 	}
 
 	@Override
-	public String requiredPermission() {
+	public String requiredPermission()
+	{
 		return "runsafe.debug.unsafe";
 	}
 
 	@Override
-	public String OnExecute(RunsafePlayer executor, String[] args) {
-		try {
+	public String OnExecute(RunsafePlayer executor, String[] args)
+	{
+		try
+		{
 			engine.eval(StringUtils.join(args, " "));
-		} catch(ScriptException e) {
+		}
+		catch (ScriptException e)
+		{
 			e.printStackTrace();
 			return e.getMessage();
 		}
