@@ -8,11 +8,11 @@ import no.runsafe.framework.server.player.RunsafePlayer;
 
 import java.util.logging.Level;
 
-public class SetConsoleDebugLevelCommand extends RunsafeConsoleCommand
+public class DebugLevelCommand extends RunsafeConsoleCommand
 {
-	public SetConsoleDebugLevelCommand(IOutput output)
+	public DebugLevelCommand(IOutput output)
 	{
-		super("debug", null, "plugin", "level");
+		super("debuglevel", null, "plugin", "level");
 		this.output = output;
 	}
 

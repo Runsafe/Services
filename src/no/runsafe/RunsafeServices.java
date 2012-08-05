@@ -28,14 +28,13 @@ public class RunsafeServices extends RunsafePlugin implements IPumpProvider, ICo
 		config.addSubCommand(getInstance(ReloadConfigCommand.class));
 		command.addSubCommand(config);
 
-		command.addSubCommand(getInstance(SetConsoleDebugLevelCommand.class));
+		command.addSubCommand(getInstance(DebugLevelCommand.class));
 		command.addSubCommand(getInstance(RunsafePluginVersions.class));
 
 		RunsafeCommand imports = new RunsafeCommand("import", null);
 		imports.addSubCommand(getInstance(EssentialsPlayers.class));
 
 		command.addSubCommand(imports);
-		command.addSubCommand(new DebugCommand());
 
 		addComponent(command);
 
