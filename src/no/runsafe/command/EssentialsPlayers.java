@@ -2,7 +2,10 @@ package no.runsafe.command;
 
 import no.runsafe.framework.command.RunsafeConsoleCommand;
 import no.runsafe.framework.database.IDatabase;
+import no.runsafe.framework.output.IOutput;
+import no.runsafe.framework.server.RunsafeServer;
 import no.runsafe.framework.server.player.RunsafePlayer;
+import no.runsafe.framework.timer.IScheduler;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -14,14 +17,31 @@ import java.sql.Timestamp;
 
 public class EssentialsPlayers extends RunsafeConsoleCommand
 {
-	public EssentialsPlayers(IDatabase db)
+	public EssentialsPlayers(IDatabase db, IScheduler scheduler, IOutput output)
 	{
 		super("essentials", null);
 		database = db;
+		this.scheduler = scheduler;
+		console = output;
 	}
 
 	@Override
 	public String OnExecute(RunsafePlayer executor, String[] args)
+	{
+		scheduler.startAsyncTask(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				int count = playerImport();
+				console.write(String.format("Import of %d players completed.", count));
+			}
+		}, 0);
+
+		return "Started loading player data from Essentials.";
+	}
+
+	private int playerImport()
 	{
 		PreparedStatement update = database.prepare(
 			"INSERT INTO player_db (`name`,`joined`,`login`,`logout`,`ip`,`banned`,`ban_reason`) VALUES (?,?,?,?,INET_ATON(?),?,?)" +
@@ -33,9 +53,8 @@ public class EssentialsPlayers extends RunsafeConsoleCommand
 				"`banned`=VALUES(`banned`)," +
 				"`ban_reason`=VALUES(`ban_reason`)"
 		);
-
 		File sourceDir = new File("plugins/Essentials/userdata");
-
+		int count = 0;
 		for (File file : sourceDir.listFiles())
 		{
 			YamlConfiguration playerData = new YamlConfiguration();
@@ -60,8 +79,15 @@ public class EssentialsPlayers extends RunsafeConsoleCommand
 
 			String banReason = null;
 			if (playerData.contains("ban.reason"))
+			{
 				banReason = playerData.getString("ban.reason");
-
+				if (banReason != null)
+				{
+					RunsafePlayer player = RunsafeServer.Instance.getPlayer(file.getName().replace(".yml", ""));
+					if (!player.isBanned())
+						banReason = null;
+				}
+			}
 			try
 			{
 				update.setString(1, file.getName().replace(".yml", ""));
@@ -72,14 +98,18 @@ public class EssentialsPlayers extends RunsafeConsoleCommand
 				update.setTimestamp(6, banReason == null ? null : logout);
 				update.setString(7, banReason);
 				update.executeUpdate();
+				count++;
 			}
 			catch (SQLException e)
 			{
-				e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+				console.write(String.format("Failed importing %s: %s", file.getName(), e.getMessage()));
+				e.printStackTrace();
 			}
 		}
-		return "Player data loaded from Essentials.";
+		return count;
 	}
 
 	private IDatabase database;
+	private IScheduler scheduler;
+	private IOutput console;
 }
