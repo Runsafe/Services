@@ -28,20 +28,19 @@ public class DebugLevelCommand extends RunsafeConsoleCommand
 	@Override
 	public String OnExecute(RunsafePlayer executor, String[] args)
 	{
-		if ("*".equals(getArg("plugin")))
+		StringBuilder result = new StringBuilder(String.format("Setting debug level for %s to %s:\n", getArg("plugin"), getArg("level")));
+		String pluginName = getArg("plugin");
+		Level level = Level.parse(getArg("level"));
+		for (RunsafePlugin plugin : RunsafePlugin.Instances.values())
 		{
-			for (RunsafePlugin plugin : RunsafePlugin.Instances.values())
-				plugin.getComponent(IOutput.class).setDebugLevel(Level.parse(getArg("level")));
+			if ("*".equals(getArg("plugin")) || plugin.getName().startsWith(pluginName))
+			{
+				IOutput output = plugin.getComponent(IOutput.class);
+				output.setDebugLevel(level);
+				result.append(String.format("[%s] Debug level is %s.\n", plugin.getName(), output.getDebugLevel().getName()));
+			}
 		}
-		else
-		{
-			RunsafePlugin plugin = RunsafePlugin.Instances.get(getArg("plugin"));
-			if (plugin == null)
-				return String.format("Unknown plugin %s", getArg("plugin"));
-
-			plugin.getComponent(IOutput.class).setDebugLevel(Level.parse(getArg("level")));
-		}
-		return String.format("Debug level is now %s.", output.getDebugLevel().getName());
+		return result.toString();
 	}
 
 	private final IOutput output;
