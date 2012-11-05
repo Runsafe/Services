@@ -19,7 +19,7 @@ public class EssentialsPlayers extends RunsafeConsoleCommand
 {
 	public EssentialsPlayers(IDatabase db, IScheduler scheduler, IOutput output)
 	{
-		super("essentials", null);
+		super("essentials");
 		database = db;
 		this.scheduler = scheduler;
 		console = output;

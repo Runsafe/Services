@@ -12,7 +12,7 @@ public class DebugLevelCommand extends RunsafeConsoleCommand
 {
 	public DebugLevelCommand(IOutput output)
 	{
-		super("debuglevel", null, "plugin", "level");
+		super("debuglevel", "plugin", "level");
 		this.output = output;
 	}
 

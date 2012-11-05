@@ -16,22 +16,21 @@ import java.util.logging.Level;
 
 public class RunsafeServices extends RunsafePlugin implements IPumpProvider, IConfigurationFile, IPluginEnabled
 {
-
 	@Override
 	protected void PluginSetup()
 	{
 		this.addComponent(new MessagePump());
 
-		RunsafeCommand command = new RunsafeCommand("runsafe", null);
+		RunsafeCommand command = new RunsafeCommand("runsafe");
 
-		RunsafeCommand config = new RunsafeCommand("config", null);
+		RunsafeCommand config = new RunsafeCommand("config");
 		config.addSubCommand(getInstance(ReloadConfigCommand.class));
 		command.addSubCommand(config);
 
 		command.addSubCommand(getInstance(DebugLevelCommand.class));
 		command.addSubCommand(getInstance(RunsafePluginVersions.class));
 
-		RunsafeCommand imports = new RunsafeCommand("import", null);
+		RunsafeCommand imports = new RunsafeCommand("import");
 		imports.addSubCommand(getInstance(EssentialsPlayers.class));
 
 		command.addSubCommand(imports);
