@@ -9,7 +9,7 @@ public class ReloadConfigCommand extends RunsafeCommand
 {
 	public ReloadConfigCommand(IMessagePump pump)
 	{
-		super("reload", null);
+		super("reload");
 		messagePump = pump;
 	}
 

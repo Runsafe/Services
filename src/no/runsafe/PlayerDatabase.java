@@ -69,7 +69,7 @@ public class PlayerDatabase implements ISchemaChanges, IPlayerJoinEvent, IPlayer
 		}
 		catch (SQLException e)
 		{
-			e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+			console.write(e.getMessage());
 		}
 	}
 
@@ -88,7 +88,7 @@ public class PlayerDatabase implements ISchemaChanges, IPlayerJoinEvent, IPlayer
 		}
 		catch (SQLException e)
 		{
-			e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+			console.write(e.getMessage());
 		}
 	}
 
@@ -132,6 +132,6 @@ public class PlayerDatabase implements ISchemaChanges, IPlayerJoinEvent, IPlayer
 		throw new UnsupportedOperationException("Not implemented");
 	}
 
-	private IOutput console;
-	private IDatabase database;
+	private final IOutput console;
+	private final IDatabase database;
 }

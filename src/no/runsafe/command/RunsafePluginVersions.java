@@ -8,7 +8,7 @@ public class RunsafePluginVersions extends RunsafeCommand
 {
 	public RunsafePluginVersions()
 	{
-		super("plugins", null);
+		super("plugins");
 	}
 
 	@Override

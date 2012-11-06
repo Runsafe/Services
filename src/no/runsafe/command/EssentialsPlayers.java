@@ -109,7 +109,7 @@ public class EssentialsPlayers extends RunsafeConsoleCommand
 		return count;
 	}
 
-	private IDatabase database;
-	private IScheduler scheduler;
-	private IOutput console;
+	private final IDatabase database;
+	private final IScheduler scheduler;
+	private final IOutput console;
 }

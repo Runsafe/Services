@@ -10,10 +10,9 @@ import java.util.logging.Level;
 
 public class DebugLevelCommand extends RunsafeConsoleCommand
 {
-	public DebugLevelCommand(IOutput output)
+	public DebugLevelCommand()
 	{
 		super("debuglevel", "plugin", "level");
-		this.output = output;
 	}
 
 	@Override
@@ -42,6 +41,4 @@ public class DebugLevelCommand extends RunsafeConsoleCommand
 		}
 		return result.toString();
 	}
-
-	private final IOutput output;
 }
