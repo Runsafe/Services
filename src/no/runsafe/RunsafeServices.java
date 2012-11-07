@@ -36,8 +36,6 @@ public class RunsafeServices extends RunsafePlugin implements IPumpProvider, ICo
 		command.addSubCommand(imports);
 
 		addComponent(command);
-
-		addComponent(PlayerDatabase.class);
 	}
 
 	public IMessagePump getInstance()
