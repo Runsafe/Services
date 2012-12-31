@@ -1,6 +1,7 @@
 package no.runsafe;
 
 import no.runsafe.command.*;
+import no.runsafe.framework.RunsafeConfigurablePlugin;
 import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.framework.command.RunsafeCommand;
 import no.runsafe.framework.configuration.IConfiguration;
@@ -14,12 +15,12 @@ import no.runsafe.framework.output.IOutput;
 import java.io.InputStream;
 import java.util.logging.Level;
 
-public class RunsafeServices extends RunsafePlugin implements IPumpProvider, IConfigurationFile, IPluginEnabled
+public class RunsafeServices extends RunsafeConfigurablePlugin implements IPumpProvider, IPluginEnabled
 {
 	@Override
 	protected void PluginSetup()
 	{
-		this.addComponent(new MessagePump());
+		this.addComponent(MessagePump.class);
 
 		RunsafeCommand command = new RunsafeCommand("runsafe");
 
@@ -30,10 +31,10 @@ public class RunsafeServices extends RunsafePlugin implements IPumpProvider, ICo
 		command.addSubCommand(getInstance(DebugLevelCommand.class));
 		command.addSubCommand(getInstance(RunsafePluginVersions.class));
 
-		RunsafeCommand imports = new RunsafeCommand("import");
-		imports.addSubCommand(getInstance(EssentialsPlayers.class));
+		//RunsafeCommand imports = new RunsafeCommand("import");
+		//imports.addSubCommand(getInstance(EssentialsPlayers.class));
 
-		command.addSubCommand(imports);
+		//command.addSubCommand(imports);
 
 		addComponent(command);
 	}
@@ -41,18 +42,6 @@ public class RunsafeServices extends RunsafePlugin implements IPumpProvider, ICo
 	public IMessagePump getInstance()
 	{
 		return getComponent(IMessagePump.class);
-	}
-
-	@Override
-	public String getConfigurationPath()
-	{
-		return "plugins/" + this.getName() + "/config.yml";
-	}
-
-	@Override
-	public InputStream getDefaultConfiguration()
-	{
-		return getResource("defaults.yml");
 	}
 
 	@Override
