@@ -5,9 +5,9 @@
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
       </element>
-      <element id="file-copy" path="$PROJECT_DIR$/plugin.yml" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/plugin.yml" />
       <element id="module-output" name="RunsafeServices" />
-      <element id="file-copy" path="$PROJECT_DIR$/../PlayerNotes/defaults.yml" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/defaults.yml" />
     </root>
   </artifact>
 </component>
