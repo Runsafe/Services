@@ -1,38 +1,37 @@
 package no.runsafe.command;
 
-
 import no.runsafe.framework.RunsafePlugin;
-import no.runsafe.framework.command.RunsafeConsoleCommand;
+import no.runsafe.framework.command.console.ConsoleCommand;
 import no.runsafe.framework.output.IOutput;
-import no.runsafe.framework.server.player.RunsafePlayer;
 
+import java.util.HashMap;
 import java.util.logging.Level;
 
-public class DebugLevelCommand extends RunsafeConsoleCommand
+public class DebugLevelCommand extends ConsoleCommand
 {
 	public DebugLevelCommand()
 	{
-		super("debuglevel", "plugin", "level");
+		super("debuglevel", "Changes the output debug level for plugins", "plugin", "level");
 	}
 
 	@Override
-	public String getCommandParams()
+	public String getUsageCommandParams()
 	{
-		String part = commandName + " *|<plugin> NONE|SEVERE|WARNING|INFO|CONFIG|FINE|FINER|FINEST|ALL";
-		if (superCommand != null)
-			return superCommand.getCommandParams() + " " + part;
-		return part;
+		return " *|<plugin> NONE|SEVERE|WARNING|INFO|CONFIG|FINE|FINER|FINEST|ALL";
 	}
 
 	@Override
-	public String OnExecute(RunsafePlayer executor, String[] args)
+	public String OnExecute(HashMap<String, String> parameters, String[] args)
 	{
-		StringBuilder result = new StringBuilder(String.format("Setting debug level for %s to %s:\n", getArg("plugin"), getArg("level")));
-		String pluginName = getArg("plugin");
-		Level level = Level.parse(getArg("level"));
+		String pluginName = parameters.get("plugin");
+		Level level = Level.parse(parameters.get("level"));
+
+		StringBuilder result = new StringBuilder(
+			String.format("Setting debug level for %s to %s:\n", pluginName, level)
+		);
 		for (RunsafePlugin plugin : RunsafePlugin.Instances.values())
 		{
-			if ("*".equals(getArg("plugin")) || plugin.getName().startsWith(pluginName))
+			if ("*".equals(pluginName) || plugin.getName().startsWith(pluginName))
 			{
 				IOutput output = plugin.getComponent(IOutput.class);
 				output.setDebugLevel(level);

@@ -1,24 +1,20 @@
 package no.runsafe.command;
 
 import no.runsafe.framework.RunsafePlugin;
-import no.runsafe.framework.command.RunsafeCommand;
-import no.runsafe.framework.server.player.RunsafePlayer;
+import no.runsafe.framework.command.ExecutableCommand;
+import no.runsafe.framework.server.ICommandExecutor;
 
-public class RunsafePluginVersions extends RunsafeCommand
+import java.util.HashMap;
+
+public class RunsafePluginVersions extends ExecutableCommand
 {
 	public RunsafePluginVersions()
 	{
-		super("plugins");
+		super("plugins", "Lists information about plugins using the runsafe framework", "runsafe.plugin.list");
 	}
 
 	@Override
-	public String requiredPermission()
-	{
-		return "runsafe.plugin.list";
-	}
-
-	@Override
-	public String OnExecute(RunsafePlayer executor, String[] args)
+	public String OnExecute(ICommandExecutor executor, HashMap<String, String> parameters, String[] args)
 	{
 		StringBuilder result = new StringBuilder();
 		for (String plugin : RunsafePlugin.Instances.keySet())
