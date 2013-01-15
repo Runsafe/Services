@@ -14,7 +14,7 @@ public class RunsafePluginVersions extends ExecutableCommand
 	}
 
 	@Override
-	public String OnExecute(ICommandExecutor executor, HashMap<String, String> parameters, String[] args)
+	public String OnExecute(ICommandExecutor executor, HashMap<String, String> params)
 	{
 		StringBuilder result = new StringBuilder();
 		for (String plugin : RunsafePlugin.Instances.keySet())

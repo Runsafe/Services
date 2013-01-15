@@ -15,7 +15,7 @@ public class ReloadConfigCommand extends ConsoleCommand
 	}
 
 	@Override
-	public String OnExecute(HashMap<String, String> stringStringHashMap, String[] strings)
+	public String OnExecute(HashMap<String, String> params)
 	{
 		Message reloadConfigMessage = new Message();
 		reloadConfigMessage.setTargetService("Configuration");

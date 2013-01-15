@@ -21,7 +21,7 @@ public class DebugLevelCommand extends ConsoleCommand
 	}
 
 	@Override
-	public String OnExecute(HashMap<String, String> parameters, String[] args)
+	public String OnExecute(HashMap<String, String> parameters)
 	{
 		String pluginName = parameters.get("plugin");
 		Level level = Level.parse(parameters.get("level"));
