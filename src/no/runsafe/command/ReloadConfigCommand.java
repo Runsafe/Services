@@ -1,29 +1,23 @@
 package no.runsafe.command;
 
+import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.framework.command.console.ConsoleCommand;
-import no.runsafe.framework.messaging.IMessagePump;
-import no.runsafe.framework.messaging.Message;
+import no.runsafe.framework.configuration.IConfiguration;
 
 import java.util.HashMap;
 
 public class ReloadConfigCommand extends ConsoleCommand
 {
-	public ReloadConfigCommand(IMessagePump pump)
+	public ReloadConfigCommand()
 	{
 		super("reload", "Reloads configuration of runsafe plugins");
-		messagePump = pump;
 	}
 
 	@Override
 	public String OnExecute(HashMap<String, String> params)
 	{
-		Message reloadConfigMessage = new Message();
-		reloadConfigMessage.setTargetService("Configuration");
-		reloadConfigMessage.setQuestion("config.reload");
-		messagePump.HandleMessageAll(reloadConfigMessage);
+		for (IConfiguration config : RunsafePlugin.getPluginAPI(IConfiguration.class))
+			config.load();
 		return "Configuration reloaded";
 	}
-
-	private final IMessagePump messagePump;
-
 }
