@@ -1,6 +1,6 @@
 package no.runsafe.command;
 
-import no.runsafe.framework.RunsafePlugin;
+import no.runsafe.framework.InjectionPlugin;
 import no.runsafe.framework.command.console.ConsoleCommand;
 import no.runsafe.framework.output.IOutput;
 
@@ -29,7 +29,7 @@ public class DebugLevelCommand extends ConsoleCommand
 		StringBuilder result = new StringBuilder(
 			String.format("Setting debug level for %s to %s:\n", pluginName, level)
 		);
-		for (RunsafePlugin plugin : RunsafePlugin.Instances.values())
+		for (InjectionPlugin plugin : InjectionPlugin.Instances.values())
 		{
 			if ("*".equals(pluginName) || plugin.getName().startsWith(pluginName))
 			{
