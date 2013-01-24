@@ -2,7 +2,7 @@ package no.runsafe.command;
 
 import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.framework.command.console.ConsoleCommand;
-import no.runsafe.framework.configuration.IConfiguration;
+import no.runsafe.framework.configuration.ConfigurationEngine;
 
 import java.util.HashMap;
 
@@ -16,7 +16,7 @@ public class ReloadConfigCommand extends ConsoleCommand
 	@Override
 	public String OnExecute(HashMap<String, String> params)
 	{
-		for (IConfiguration config : RunsafePlugin.getPluginAPI(IConfiguration.class))
+		for (ConfigurationEngine config : RunsafePlugin.getPluginAPI(ConfigurationEngine.class))
 			config.load();
 		return "Configuration reloaded";
 	}
