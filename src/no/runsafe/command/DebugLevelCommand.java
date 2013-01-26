@@ -17,7 +17,7 @@ public class DebugLevelCommand extends ConsoleCommand
 	@Override
 	public String getUsageCommandParams()
 	{
-		return " *|<plugin> NONE|SEVERE|WARNING|INFO|CONFIG|FINE|FINER|FINEST|ALL";
+		return " *|<plugin> OFF|SEVERE|WARNING|INFO|CONFIG|FINE|FINER|FINEST|ALL";
 	}
 
 	@Override
