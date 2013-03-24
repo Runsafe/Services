@@ -33,7 +33,7 @@ public class RunsafeServices extends RunsafeConfigurablePlugin implements IPlugi
 	public void OnPluginEnabled()
 	{
 		String level = getComponent(IConfiguration.class).getConfigValueAsString("debug");
-		if (level != null)
+		if (level != null && !level.equals("false"))
 		{
 			Level debugLevel = Level.parse(level);
 			for (IOutput console : RunsafePlugin.getPluginAPI(IOutput.class))
