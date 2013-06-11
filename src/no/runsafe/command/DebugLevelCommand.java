@@ -1,8 +1,8 @@
 package no.runsafe.command;
 
-import no.runsafe.framework.InjectionPlugin;
-import no.runsafe.framework.command.console.ConsoleCommand;
-import no.runsafe.framework.output.IOutput;
+import no.runsafe.framework.api.IOutput;
+import no.runsafe.framework.api.command.console.ConsoleCommand;
+import no.runsafe.framework.internal.InjectionPlugin;
 
 import java.util.HashMap;
 import java.util.logging.Level;

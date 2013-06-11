@@ -5,10 +5,10 @@ import no.runsafe.command.ReloadConfigCommand;
 import no.runsafe.command.RunsafePluginVersions;
 import no.runsafe.framework.RunsafeConfigurablePlugin;
 import no.runsafe.framework.RunsafePlugin;
-import no.runsafe.framework.command.Command;
-import no.runsafe.framework.configuration.IConfiguration;
-import no.runsafe.framework.event.IPluginEnabled;
-import no.runsafe.framework.output.IOutput;
+import no.runsafe.framework.api.IConfiguration;
+import no.runsafe.framework.api.IOutput;
+import no.runsafe.framework.api.command.Command;
+import no.runsafe.framework.api.event.plugin.IPluginEnabled;
 
 import java.util.logging.Level;
 

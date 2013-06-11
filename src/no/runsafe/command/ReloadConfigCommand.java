@@ -1,8 +1,8 @@
 package no.runsafe.command;
 
 import no.runsafe.framework.RunsafePlugin;
-import no.runsafe.framework.command.console.ConsoleCommand;
-import no.runsafe.framework.configuration.ConfigurationEngine;
+import no.runsafe.framework.api.command.console.ConsoleCommand;
+import no.runsafe.framework.internal.configuration.ConfigurationEngine;
 
 import java.util.HashMap;
 
