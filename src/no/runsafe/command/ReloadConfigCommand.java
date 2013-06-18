@@ -17,7 +17,7 @@ public class ReloadConfigCommand extends ConsoleCommand
 	public String OnExecute(HashMap<String, String> params)
 	{
 		for (ConfigurationEngine config : RunsafePlugin.getPluginAPI(ConfigurationEngine.class))
-			config.load();
+			config.start();
 		return "Configuration reloaded";
 	}
 }
