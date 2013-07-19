@@ -4,7 +4,7 @@ import no.runsafe.framework.api.IOutput;
 import no.runsafe.framework.api.command.console.ConsoleCommand;
 import no.runsafe.framework.internal.InjectionPlugin;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 
 public class DebugLevelCommand extends ConsoleCommand
@@ -21,7 +21,7 @@ public class DebugLevelCommand extends ConsoleCommand
 	}
 
 	@Override
-	public String OnExecute(HashMap<String, String> parameters)
+	public String OnExecute(Map<String, String> parameters)
 	{
 		String pluginName = parameters.get("plugin");
 		Level level = Level.parse(parameters.get("level"));
