@@ -1,9 +1,11 @@
 package no.runsafe.command;
 
 import no.runsafe.framework.api.IOutput;
+import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.console.ConsoleCommand;
 import no.runsafe.framework.internal.InjectionPlugin;
 
+import javax.annotation.Nonnull;
 import java.util.Map;
 import java.util.logging.Level;
 
@@ -11,9 +13,13 @@ public class DebugLevelCommand extends ConsoleCommand
 {
 	public DebugLevelCommand()
 	{
-		super("debuglevel", "Changes the output debug level for plugins", "plugin", "level");
+		super(
+			"debuglevel", "Changes the output debug level for plugins",
+			new RequiredArgument("plugin"), new RequiredArgument("level")
+		);
 	}
 
+	@Nonnull
 	@Override
 	public String getUsageCommandParams()
 	{
