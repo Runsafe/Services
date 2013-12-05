@@ -1,5 +1,6 @@
 package no.runsafe.command;
 
+import no.runsafe.framework.api.IDebug;
 import no.runsafe.framework.api.IOutput;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.console.ConsoleCommand;
@@ -43,9 +44,9 @@ public class DebugLevelCommand extends ConsoleCommand
 		{
 			if ("*".equals(pluginName) || plugin.getName().startsWith(pluginName))
 			{
-				IOutput output = plugin.getComponent(IOutput.class);
-				output.setDebugLevel(level);
-				result.append(String.format("[%s] Debug level is %s.\n", plugin.getName(), output.getDebugLevel().getName()));
+				IDebug debugger = plugin.getComponent(IDebug.class);
+				debugger.setDebugLevel(level);
+				result.append(String.format("[%s] Debug level is %s.\n", plugin.getName(), debugger.getDebugLevel().getName()));
 			}
 		}
 		return result.toString();

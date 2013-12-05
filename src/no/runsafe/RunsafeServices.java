@@ -6,7 +6,7 @@ import no.runsafe.command.RunsafePluginVersions;
 import no.runsafe.framework.RunsafeConfigurablePlugin;
 import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.framework.api.IConfiguration;
-import no.runsafe.framework.api.IOutput;
+import no.runsafe.framework.api.IDebug;
 import no.runsafe.framework.api.command.Command;
 import no.runsafe.framework.api.event.plugin.IPluginEnabled;
 
@@ -36,8 +36,8 @@ public class RunsafeServices extends RunsafeConfigurablePlugin implements IPlugi
 		if (level != null && !level.equals("false"))
 		{
 			Level debugLevel = Level.parse(level);
-			for (IOutput console : RunsafePlugin.getPluginAPI(IOutput.class))
-				console.setDebugLevel(debugLevel);
+			for (IDebug debugger : RunsafePlugin.getPluginAPI(IDebug.class))
+				debugger.setDebugLevel(debugLevel);
 		}
 	}
 }
