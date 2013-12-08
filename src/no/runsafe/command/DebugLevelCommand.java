@@ -1,11 +1,10 @@
 package no.runsafe.command;
 
 import no.runsafe.framework.api.IDebug;
-import no.runsafe.framework.api.IOutput;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.console.ConsoleCommand;
+import no.runsafe.framework.internal.Debug;
 import no.runsafe.framework.internal.InjectionPlugin;
-import no.runsafe.framework.minecraft.RunsafeServer;
 
 import javax.annotation.Nonnull;
 import java.util.Map;
@@ -35,7 +34,7 @@ public class DebugLevelCommand extends ConsoleCommand
 		Level level = Level.parse(parameters.get("level"));
 
 		if ("*".equals(pluginName))
-			RunsafeServer.Instance.getDebugger().setDebugLevel(level);
+			Debug.Global().setDebugLevel(level);
 
 		StringBuilder result = new StringBuilder(
 			String.format("Setting debug level for %s to %s:\n", pluginName, level)
