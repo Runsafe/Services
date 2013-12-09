@@ -1,10 +1,10 @@
 package no.runsafe.command;
 
-import no.runsafe.framework.api.IDebug;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.console.ConsoleCommand;
-import no.runsafe.framework.internal.Debug;
+import no.runsafe.framework.api.log.IDebug;
 import no.runsafe.framework.internal.InjectionPlugin;
+import no.runsafe.framework.internal.log.Debug;
 
 import javax.annotation.Nonnull;
 import java.util.Map;
