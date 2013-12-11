@@ -36,18 +36,14 @@ public class DebugLevelCommand extends ConsoleCommand
 		if ("*".equals(pluginName))
 			Debug.Global().setDebugLevel(level);
 
-		StringBuilder result = new StringBuilder(
-			String.format("Setting debug level for %s to %s:\n", pluginName, level)
-		);
 		for (InjectionPlugin plugin : InjectionPlugin.Instances.values())
 		{
 			if ("*".equals(pluginName) || plugin.getName().startsWith(pluginName))
 			{
 				IDebug debugger = plugin.getComponent(IDebug.class);
 				debugger.setDebugLevel(level);
-				result.append(String.format("[%s] Debug level is %s.\n", plugin.getName(), debugger.getDebugLevel().getName()));
 			}
 		}
-		return result.toString();
+		return String.format("Set debug level for plugins matching %s to %s", pluginName, level);
 	}
 }
