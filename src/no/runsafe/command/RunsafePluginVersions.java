@@ -17,8 +17,8 @@ public class RunsafePluginVersions extends ExecutableCommand
 	public String OnExecute(ICommandExecutor executor, Map<String, String> params)
 	{
 		StringBuilder result = new StringBuilder();
-		for (String plugin : RunsafePlugin.Instances.keySet())
-			result.append(String.format("%s %s\n", plugin, RunsafePlugin.Instances.get(plugin).getDescription().getVersion()));
+		for (RunsafePlugin plugin : RunsafePlugin.getPlugins("*"))
+			result.append(String.format("%s %s\n", plugin.getName(), plugin.getDescription().getVersion()));
 
 		return result.toString();
 	}

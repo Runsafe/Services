@@ -1,9 +1,10 @@
 package no.runsafe.command;
 
+import no.runsafe.framework.RunsafePlugin;
+import no.runsafe.framework.api.IKernel;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.console.ConsoleCommand;
 import no.runsafe.framework.api.log.IDebug;
-import no.runsafe.framework.internal.InjectionPlugin;
 import no.runsafe.framework.internal.log.Debug;
 
 import javax.annotation.Nonnull;
@@ -36,13 +37,10 @@ public class DebugLevelCommand extends ConsoleCommand
 		if ("*".equals(pluginName))
 			Debug.Global().setDebugLevel(level);
 
-		for (InjectionPlugin plugin : InjectionPlugin.Instances.values())
+		for (IKernel plugin : RunsafePlugin.getPlugins(pluginName))
 		{
-			if ("*".equals(pluginName) || plugin.getName().startsWith(pluginName))
-			{
-				IDebug debugger = plugin.getComponent(IDebug.class);
-				debugger.setDebugLevel(level);
-			}
+			IDebug debugger = plugin.getComponent(IDebug.class);
+			debugger.setDebugLevel(level);
 		}
 		return String.format("Set debug level for plugins matching %s to %s", pluginName, level);
 	}
