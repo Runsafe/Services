@@ -3,11 +3,11 @@ package no.runsafe;
 import no.runsafe.command.DebugLevelCommand;
 import no.runsafe.command.ReloadConfigCommand;
 import no.runsafe.command.RunsafePluginVersions;
-import no.runsafe.framework.RunsafeConfigurablePlugin;
+import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.framework.api.command.Command;
 import no.runsafe.framework.features.Commands;
 
-public class RunsafeServices extends RunsafeConfigurablePlugin
+public class RunsafeServices extends RunsafePlugin
 {
 	@Override
 	protected void PluginSetup()
