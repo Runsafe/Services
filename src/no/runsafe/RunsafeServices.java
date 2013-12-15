@@ -5,12 +5,15 @@ import no.runsafe.command.ReloadConfigCommand;
 import no.runsafe.command.RunsafePluginVersions;
 import no.runsafe.framework.RunsafeConfigurablePlugin;
 import no.runsafe.framework.api.command.Command;
+import no.runsafe.framework.features.Commands;
 
 public class RunsafeServices extends RunsafeConfigurablePlugin
 {
 	@Override
 	protected void PluginSetup()
 	{
+		addComponent(Commands.class);
+
 		Command command = new Command("runsafe", "Runsafe core services", null);
 
 		Command config = new Command("config", "Commands to control plugin configurations", null);
