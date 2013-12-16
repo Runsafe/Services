@@ -10,7 +10,7 @@ import no.runsafe.framework.features.Commands;
 public class RunsafeServices extends RunsafePlugin
 {
 	@Override
-	protected void PluginSetup()
+	protected void pluginSetup()
 	{
 		addComponent(Commands.class);
 
