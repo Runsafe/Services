@@ -25,7 +25,7 @@ public class SetConfigurationCommand extends ConsoleCommand
 	{
 		IKernel plugin = RunsafePlugin.getPlugin(params.get("plugin"));
 		String key = params.get("key");
-		String value = params.get("plugin");
+		String value = params.get("value");
 		if (plugin == null)
 			return "Invalid plugin specified";
 		ConfigurationEngine engine = plugin.getComponent(ConfigurationEngine.class);
