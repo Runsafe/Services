@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class ConfigureCommand extends ConsoleCommand
 {
-	protected ConfigureCommand()
+	public ConfigureCommand()
 	{
 		super(
 			"configure", "Allows run time tweaking of configuration options",
@@ -29,7 +29,7 @@ public class ConfigureCommand extends ConsoleCommand
 		if (plugin == null)
 			return "Invalid plugin specified";
 		IConfiguration configuration = plugin.getComponent(IConfiguration.class);
-		if(key.equals("--reset"))
+		if (key.equals("--reset"))
 		{
 			configuration.reset();
 			configuration.save();
