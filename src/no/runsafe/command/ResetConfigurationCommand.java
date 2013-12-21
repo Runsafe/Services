@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class ResetConfigurationCommand extends ConsoleCommand
 {
-	protected ResetConfigurationCommand()
+	public ResetConfigurationCommand()
 	{
 		super("reset", "Resets the configuration for the selected plugin to the defaults.", new PluginArgument());
 	}
