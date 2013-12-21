@@ -1,5 +1,6 @@
 package no.runsafe;
 
+import no.runsafe.command.ConfigureCommand;
 import no.runsafe.command.DebugLevelCommand;
 import no.runsafe.command.ReloadConfigCommand;
 import no.runsafe.command.RunsafePluginVersions;
@@ -22,6 +23,7 @@ public class RunsafeServices extends RunsafePlugin
 
 		command.addSubCommand(getInstance(DebugLevelCommand.class));
 		command.addSubCommand(getInstance(RunsafePluginVersions.class));
+		command.addSubCommand(getInstance(ConfigureCommand.class));
 
 		addComponent(command);
 	}
