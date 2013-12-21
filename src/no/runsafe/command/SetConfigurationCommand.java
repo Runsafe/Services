@@ -45,11 +45,11 @@ public class SetConfigurationCommand extends ConsoleCommand
 			return String.format("The configuration key '%s' does not appear valid for plugin %s.", key, params.get("plugin"));
 
 		if (oldValue.equals(value))
-			return String.format("%s was already set to %s.", key, value);
+			return String.format("%s: %s was already set to %s.", params.get("plugin"), key, value);
 
 		configuration.setConfigValue(key, value);
 		configuration.save();
 		plugin.getComponent(ConfigurationEngine.class).load();
-		return String.format("%s has been changed from %s to %s.", key, oldValue, value);
+		return String.format("%s: %s has been changed from %s to %s.", params.get("plugin"), key, oldValue, value);
 	}
 }
