@@ -7,6 +7,7 @@ import no.runsafe.framework.api.command.argument.OptionalArgument;
 import no.runsafe.framework.api.command.argument.TrailingArgument;
 import no.runsafe.framework.api.command.console.ConsoleCommand;
 import no.runsafe.framework.internal.configuration.ConfigurationEngine;
+import no.runsafe.framework.text.ChatColour;
 
 import java.util.Map;
 
@@ -36,7 +37,7 @@ public class SetConfigurationCommand extends ConsoleCommand
 		{
 			StringBuilder builder = new StringBuilder("Available keys for the plugin " + params.get("plugin") + ":\n");
 			for (String candidateKey : configuration.getConfigurationKeys())
-				builder.append("  ").append(candidateKey).append(" = ").append(configuration.getConfigValueAsString(candidateKey)).append('\n');
+				builder.append("  ").append(candidateKey).append(" = ").append(ChatColour.Escape(configuration.getConfigValueAsString(candidateKey))).append('\n');
 
 			return builder.toString();
 		}
