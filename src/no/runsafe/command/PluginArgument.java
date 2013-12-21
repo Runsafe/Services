@@ -34,7 +34,7 @@ public class PluginArgument extends CommandArgumentSpecification implements ITab
 	@Override
 	public List<String> getAlternatives(IPlayer executor, String partial)
 	{
-		return Lists.transform(
+		List<String> alternates = Lists.transform(
 			RunsafePlugin.getPlugins("*"),
 			new Function<RunsafePlugin, String>()
 			{
@@ -47,14 +47,19 @@ public class PluginArgument extends CommandArgumentSpecification implements ITab
 				}
 			}
 		);
+		alternates.add("*");
+		return alternates;
 	}
 
 	@Nullable
 	@Override
 	public String expand(ICommandExecutor context, String value)
 	{
-		List<RunsafePlugin> alternatives = RunsafePlugin.getPlugins("*");
-		if(alternatives.isEmpty() || alternatives.size() > 1)
+		if (value.equals("*"))
+			return value;
+
+		List<RunsafePlugin> alternatives = RunsafePlugin.getPlugins(value);
+		if (alternatives.isEmpty() || alternatives.size() > 1)
 			return null;
 
 		return alternatives.get(0).getName();

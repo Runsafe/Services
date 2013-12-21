@@ -10,12 +10,12 @@ import no.runsafe.framework.internal.configuration.ConfigurationEngine;
 
 import java.util.Map;
 
-public class ConfigureCommand extends ConsoleCommand
+public class SetConfigurationCommand extends ConsoleCommand
 {
-	public ConfigureCommand()
+	public SetConfigurationCommand()
 	{
 		super(
-			"configure", "Allows run time tweaking of configuration options",
+			"set", "Allows run time tweaking of configuration options",
 			new PluginArgument(), new OptionalArgument("key"), new TrailingArgument("value", false)
 		);
 	}
@@ -29,12 +29,6 @@ public class ConfigureCommand extends ConsoleCommand
 		if (plugin == null)
 			return "Invalid plugin specified";
 		IConfiguration configuration = plugin.getComponent(IConfiguration.class);
-		if (key.equals("--reset"))
-		{
-			configuration.reset();
-			configuration.save();
-			plugin.getComponent(ConfigurationEngine.class).load();
-		}
 		if (key == null)
 		{
 			StringBuilder builder = new StringBuilder("Available keys for the plugin " + params.get("plugin") + ":\n");
