@@ -29,6 +29,8 @@ public class SetConfigurationCommand extends ConsoleCommand
 		if (plugin == null)
 			return "Invalid plugin specified";
 		IConfiguration configuration = plugin.getComponent(IConfiguration.class);
+		if (configuration == null)
+			return String.format("Could not get configuration object from plugin %s!", params.get("plugin"));
 		if (key == null)
 		{
 			StringBuilder builder = new StringBuilder("Available keys for the plugin " + params.get("plugin") + ":\n");
