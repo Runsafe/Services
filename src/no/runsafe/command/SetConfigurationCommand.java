@@ -36,7 +36,7 @@ public class SetConfigurationCommand extends ConsoleCommand
 		{
 			StringBuilder builder = new StringBuilder("Available keys for the plugin " + params.get("plugin") + ":\n");
 			for (String candidateKey : configuration.getConfigurationKeys())
-				builder.append(candidateKey).append(" = ").append(configuration.getConfigValueAsString(candidateKey));
+				builder.append("  ").append(candidateKey).append(" = ").append(configuration.getConfigValueAsString(candidateKey)).append('\n');
 
 			return builder.toString();
 		}
