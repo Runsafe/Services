@@ -1,4 +1,4 @@
-package no.runsafe.command;
+package no.runsafe;
 
 import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.framework.api.IConfiguration;
@@ -22,20 +22,20 @@ public class SetConfigurationCommand extends ConsoleCommand
 	}
 
 	@Override
-	public String OnExecute(Map<String, String> params)
+	public String OnExecute(Map<String, String> parameters)
 	{
-		IKernel plugin = RunsafePlugin.getPlugin(params.get("plugin"));
-		String key = params.get("key");
-		String value = params.get("value");
+		IKernel plugin = RunsafePlugin.getPlugin(parameters.get("plugin"));
+		String key = parameters.get("key");
+		String value = parameters.get("value");
 		if (plugin == null)
 			return "Invalid plugin specified";
 		ConfigurationEngine engine = plugin.getComponent(ConfigurationEngine.class);
 		IConfiguration configuration = engine.getPluginConfiguration();
 		if (configuration == null)
-			return String.format("Could not get configuration object from plugin %s!", params.get("plugin"));
+			return String.format("Could not get configuration object from plugin %s!", parameters.get("plugin"));
 		if (key == null)
 		{
-			StringBuilder builder = new StringBuilder("Available keys for the plugin " + params.get("plugin") + ":\n");
+			StringBuilder builder = new StringBuilder("Available keys for the plugin " + parameters.get("plugin") + ":\n");
 			for (String candidateKey : configuration.getConfigurationKeys())
 				builder.append("  ").append(candidateKey).append(" = ").append(ChatColour.Escape(configuration.getConfigValueAsString(candidateKey))).append('\n');
 
@@ -43,14 +43,14 @@ public class SetConfigurationCommand extends ConsoleCommand
 		}
 		String oldValue = configuration.getConfigValueAsString(key);
 		if (oldValue == null)
-			return String.format("The configuration key '%s' does not appear valid for plugin %s.", key, params.get("plugin"));
+			return String.format("The configuration key '%s' does not appear valid for plugin %s.", key, parameters.get("plugin"));
 
 		if (oldValue.equals(value))
-			return String.format("%s: %s was already set to %s.", params.get("plugin"), key, value);
+			return String.format("%s: %s was already set to %s.", parameters.get("plugin"), key, value);
 
 		configuration.setConfigValue(key, value);
 		configuration.save();
 		plugin.getComponent(ConfigurationEngine.class).load();
-		return String.format("%s: %s has been changed from %s to %s.", params.get("plugin"), key, oldValue, value);
+		return String.format("%s: %s has been changed from %s to %s.", parameters.get("plugin"), key, oldValue, value);
 	}
 }

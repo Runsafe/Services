@@ -1,6 +1,6 @@
 name: RunsafeServices
 load: STARTUP
-main: no.runsafe.RunsafeServices
+main: no.runsafe.ServicesPlugin
 version: 1.2.@BUILD@
 authors: [mortenn, Kruithne]
 depend: []

@@ -1,11 +1,10 @@
 package no.runsafe;
 
-import no.runsafe.command.*;
 import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.framework.api.command.Command;
 import no.runsafe.framework.features.Commands;
 
-public class RunsafeServices extends RunsafePlugin
+public class ServicesPlugin extends RunsafePlugin
 {
 	@Override
 	protected void pluginSetup()
@@ -21,7 +20,7 @@ public class RunsafeServices extends RunsafePlugin
 		command.addSubCommand(config);
 
 		command.addSubCommand(getInstance(DebugLevelCommand.class));
-		command.addSubCommand(getInstance(RunsafePluginVersions.class));
+		command.addSubCommand(getInstance(PluginVersions.class));
 
 		addComponent(command);
 	}

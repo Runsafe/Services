@@ -1,4 +1,4 @@
-package no.runsafe.command;
+package no.runsafe;
 
 import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.framework.api.IKernel;

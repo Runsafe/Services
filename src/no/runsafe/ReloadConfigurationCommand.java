@@ -1,4 +1,4 @@
-package no.runsafe.command;
+package no.runsafe;
 
 import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.framework.api.IKernel;
@@ -16,9 +16,9 @@ public class ReloadConfigurationCommand extends ConsoleCommand
 	}
 
 	@Override
-	public String OnExecute(Map<String, String> params)
+	public String OnExecute(Map<String, String> parameters)
 	{
-		List<RunsafePlugin> targets = RunsafePlugin.getPlugins(params.get("plugin"));
+		List<RunsafePlugin> targets = RunsafePlugin.getPlugins(parameters.get("plugin"));
 		for (IKernel kernel : targets)
 			kernel.getComponent(ConfigurationEngine.class).load();
 		return "Configuration reloaded";

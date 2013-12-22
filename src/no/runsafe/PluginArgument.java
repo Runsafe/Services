@@ -1,4 +1,4 @@
-package no.runsafe.command;
+package no.runsafe;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
@@ -42,6 +42,7 @@ public class PluginArgument extends CommandArgumentSpecification implements ITab
 				public String apply(@Nullable RunsafePlugin plugin)
 				{
 					if (plugin == null)
+						//noinspection ReturnOfNull
 						return null;
 					return plugin.getName();
 				}
