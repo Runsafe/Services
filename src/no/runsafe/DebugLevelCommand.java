@@ -2,12 +2,14 @@ package no.runsafe;
 
 import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.framework.api.IKernel;
+import no.runsafe.framework.api.command.argument.EnumArgument;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.console.ConsoleCommand;
 import no.runsafe.framework.api.log.IDebug;
 import no.runsafe.framework.internal.log.Debug;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.logging.Level;
 
@@ -17,7 +19,7 @@ public class DebugLevelCommand extends ConsoleCommand
 	{
 		super(
 			"debuglevel", "Changes the output debug level for plugins",
-			new RequiredArgument("plugin"), new RequiredArgument("level")
+			new RequiredArgument("plugin"), new EnumArgument("enum", DebugLevel.values(), true)
 		);
 	}
 
@@ -33,7 +35,7 @@ public class DebugLevelCommand extends ConsoleCommand
 	public String OnExecute(Map<String, String> parameters)
 	{
 		String pluginName = parameters.get("plugin");
-		Level level = Level.parse(parameters.get("level").toUpperCase());
+		Level level = Level.parse(parameters.get("level"));
 
 		if ("*".equals(pluginName))
 			Debug.Global().setDebugLevel(level);
