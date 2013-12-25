@@ -28,11 +28,12 @@ public class DebugLevelCommand extends ConsoleCommand
 		return " *|<plugin> OFF|SEVERE|WARNING|INFO|CONFIG|FINE|FINER|FINEST|ALL";
 	}
 
+	@SuppressWarnings("StringToUpperCaseOrToLowerCaseWithoutLocale")
 	@Override
 	public String OnExecute(Map<String, String> parameters)
 	{
 		String pluginName = parameters.get("plugin");
-		Level level = Level.parse(parameters.get("level"));
+		Level level = Level.parse(parameters.get("level").toUpperCase());
 
 		if ("*".equals(pluginName))
 			Debug.Global().setDebugLevel(level);
