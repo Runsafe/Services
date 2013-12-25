@@ -19,7 +19,7 @@ public class DebugLevelCommand extends ConsoleCommand
 	{
 		super(
 			"debuglevel", "Changes the output debug level for plugins",
-			new RequiredArgument("plugin"), new EnumArgument("enum", DebugLevel.values(), true)
+			new RequiredArgument("plugin"), new EnumArgument("level", DebugLevel.values(), true)
 		);
 	}
 
