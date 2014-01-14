@@ -3,8 +3,7 @@ package no.runsafe;
 import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
-
-import java.util.Map;
+import no.runsafe.framework.api.command.argument.IArgumentList;
 
 public class PluginVersions extends ExecutableCommand
 {
@@ -14,7 +13,7 @@ public class PluginVersions extends ExecutableCommand
 	}
 
 	@Override
-	public String OnExecute(ICommandExecutor executor, Map<String, String> parameters)
+	public String OnExecute(ICommandExecutor executor, IArgumentList parameters)
 	{
 		StringBuilder result = new StringBuilder(0);
 		for (RunsafePlugin plugin : RunsafePlugin.getPlugins("*"))
