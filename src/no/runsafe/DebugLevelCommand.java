@@ -2,6 +2,7 @@ package no.runsafe;
 
 import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.framework.api.IKernel;
+import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.EnumArgument;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.console.ConsoleCommand;
@@ -9,7 +10,6 @@ import no.runsafe.framework.api.log.IDebug;
 import no.runsafe.framework.internal.log.Debug;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.logging.Level;
 
@@ -25,7 +25,7 @@ public class DebugLevelCommand extends ConsoleCommand
 
 	@Nonnull
 	@Override
-	public String getUsageCommandParams()
+	public String getUsageCommandParams(ICommandExecutor executor)
 	{
 		return " *|<plugin> OFF|SEVERE|WARNING|INFO|CONFIG|FINE|FINER|FINEST|ALL";
 	}
