@@ -14,7 +14,7 @@ public class HelpCommand extends ExecutableCommand
 {
 	public HelpCommand(RunsafePlugin plugin)
 	{
-		super("help", "Get command usage help", "runsafe.help", new RequiredArgument("command"), new TrailingArgument("subcommand-path"));
+		super("help", "Get command usage help", "runsafe.help", new RequiredArgument("command"), new TrailingArgument("subcommand-path", false));
 		this.plugin = plugin;
 	}
 
