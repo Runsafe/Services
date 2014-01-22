@@ -5,7 +5,6 @@ import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
-import no.runsafe.framework.api.command.argument.TrailingArgument;
 import no.runsafe.framework.internal.command.ITabExecutor;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
@@ -14,7 +13,7 @@ public class HelpCommand extends ExecutableCommand
 {
 	public HelpCommand(RunsafePlugin plugin)
 	{
-		super("help", "Get command usage help", "runsafe.help", new RequiredArgument("command"), new TrailingArgument("subcommand-path", false));
+		super("help", "Get command usage help", "runsafe.help", new RequiredArgument("command"), new SubCommandArgument(plugin));
 		this.plugin = plugin;
 	}
 
