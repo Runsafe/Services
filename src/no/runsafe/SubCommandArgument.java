@@ -10,6 +10,7 @@ import org.bukkit.Server;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -34,7 +35,8 @@ public class SubCommandArgument extends OptionalArgument implements IContextualT
 		CommandExecutor commandExecutor = command.getExecutor();
 		if (commandExecutor instanceof ITabExecutor)
 		{
-			ICommandHandler targetCommand = ((ITabExecutor) commandExecutor).getHandler().getTargetSubCommand(executor, predecessors);
+			ICommandHandler targetCommand = ((ITabExecutor) commandExecutor).getHandler()
+				.getTargetSubCommand(executor, Arrays.copyOfRange(predecessors, 1, predecessors.length));
 			if (targetCommand != null)
 				return targetCommand.getSubCommands(executor);
 		}
