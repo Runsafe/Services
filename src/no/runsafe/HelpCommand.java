@@ -21,7 +21,8 @@ public class HelpCommand extends ExecutableCommand
 	@Override
 	public String OnExecute(ICommandExecutor executor, IArgumentList parameters)
 	{
-		PluginCommand command = plugin.getCommand(parameters.get("command"));
+
+		PluginCommand command = plugin.getServer().getPluginCommand(parameters.get("command"));
 		CommandExecutor commandExecutor = command.getExecutor();
 		if (commandExecutor instanceof ITabExecutor)
 		{
