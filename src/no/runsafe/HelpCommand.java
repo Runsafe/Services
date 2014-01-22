@@ -31,7 +31,7 @@ public class HelpCommand extends ExecutableCommand
 			return "Usage: /" + ((ITabExecutor) commandExecutor).getHandler().getSubCommandUsage(executor);
 		}
 
-		return "Usage: /" + command.getUsage().replace("<command>", parameters.get("command"));
+		return "Usage: " + command.getUsage().replace("<command>", parameters.get("command"));
 	}
 
 	private final RunsafePlugin plugin;
