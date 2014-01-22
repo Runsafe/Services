@@ -17,6 +17,12 @@ public class SubCommandArgument extends OptionalArgument implements IContextualT
 	}
 
 	@Override
+	public boolean isWhitespaceInclusive()
+	{
+		return true;
+	}
+
+	@Override
 	public List<String> getAlternatives(IPlayer executor, String partial, String... predecessors)
 	{
 //		PluginCommand command = server.getPluginCommand(predecessors[0]);
