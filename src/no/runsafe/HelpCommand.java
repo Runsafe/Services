@@ -12,7 +12,7 @@ import org.bukkit.command.PluginCommand;
 
 public class HelpCommand extends ExecutableCommand
 {
-	protected HelpCommand(RunsafePlugin plugin)
+	public HelpCommand(RunsafePlugin plugin)
 	{
 		super("help", "Get command usage help", "runsafe.help", new RequiredArgument("command"), new TrailingArgument("subcommand-path"));
 		this.plugin = plugin;
