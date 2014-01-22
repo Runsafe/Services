@@ -22,6 +22,8 @@ public class HelpCommand extends ExecutableCommand
 	public String OnExecute(ICommandExecutor executor, IArgumentList parameters)
 	{
 		PluginCommand command = plugin.getServer().getPluginCommand(parameters.get("command"));
+		if (command == null)
+			return "No such command exists.";
 		CommandExecutor commandExecutor = command.getExecutor();
 		if (commandExecutor instanceof ITabExecutor)
 		{
