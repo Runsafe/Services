@@ -21,18 +21,17 @@ public class HelpCommand extends ExecutableCommand
 	@Override
 	public String OnExecute(ICommandExecutor executor, IArgumentList parameters)
 	{
-
 		PluginCommand command = plugin.getServer().getPluginCommand(parameters.get("command"));
 		CommandExecutor commandExecutor = command.getExecutor();
 		if (commandExecutor instanceof ITabExecutor)
 		{
 			String path = parameters.get("subcommand-path");
 			if (path != null)
-				return ((ITabExecutor) commandExecutor).getHandler().getSubCommandUsage(executor, path.split("\\s+"));
-			return ((ITabExecutor) commandExecutor).getHandler().getSubCommandUsage(executor);
+				return "Usage: /" + ((ITabExecutor) commandExecutor).getHandler().getSubCommandUsage(executor, path.split("\\s+"));
+			return "Usage: /" + ((ITabExecutor) commandExecutor).getHandler().getSubCommandUsage(executor);
 		}
 
-		return command.getUsage();
+		return "Usage: /" + command.getUsage().replace("<command>", parameters.get("command"));
 	}
 
 	private final RunsafePlugin plugin;
