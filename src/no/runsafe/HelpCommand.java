@@ -28,7 +28,7 @@ public class HelpCommand extends ExecutableCommand
 			String path = parameters.get("subcommand-path");
 			if (path != null)
 				return ((ITabExecutor) commandExecutor).getHandler().getSubCommandUsage(executor, path.split("\\s+"));
-			return ((ITabExecutor) commandExecutor).getHandler().getUsage(executor);
+			return ((ITabExecutor) commandExecutor).getHandler().getSubCommandUsage(executor);
 		}
 
 		return command.getUsage();
