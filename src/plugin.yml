@@ -9,6 +9,8 @@ commands:
   runsafe:
     description: Manage runsafe plugins
     aliases: [rs]
+  help:
+    description: Command usage help
 
 permissions:
   runsafe.config.reload:

@@ -11,6 +11,8 @@ public class ServicesPlugin extends RunsafePlugin
 	{
 		addComponent(Commands.class);
 
+		addComponent(HelpCommand.class);
+
 		Command command = new Command("runsafe", "Runsafe core services", null);
 
 		Command config = new Command("configuration", "Commands to control plugin configurations", null);
