@@ -3,7 +3,7 @@ package no.runsafe;
 import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.framework.api.IKernel;
 import no.runsafe.framework.api.command.console.ConsoleCommand;
-import no.runsafe.framework.internal.configuration.ConfigurationEngine;
+import no.runsafe.framework.features.Configuration;
 
 import java.util.List;
 import java.util.Map;
@@ -20,7 +20,11 @@ public class ReloadConfigurationCommand extends ConsoleCommand
 	{
 		List<RunsafePlugin> targets = RunsafePlugin.getPlugins(parameters.get("plugin"));
 		for (IKernel kernel : targets)
-			kernel.getComponent(ConfigurationEngine.class).load();
+		{
+			Configuration feature = kernel.getComponent(Configuration.class);
+			if (feature != null)
+				feature.start();
+		}
 		return "Configuration reloaded";
 	}
 }
