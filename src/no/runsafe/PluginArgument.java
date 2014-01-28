@@ -56,7 +56,7 @@ public class PluginArgument extends CommandArgumentSpecification implements ITab
 	@Override
 	public String expand(ICommandExecutor context, String value)
 	{
-		if (value.equals("*"))
+		if (value == null || value.equals("*"))
 			return value;
 
 		List<RunsafePlugin> alternatives = RunsafePlugin.getPlugins(value);
