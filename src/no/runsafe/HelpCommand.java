@@ -3,6 +3,7 @@ package no.runsafe;
 import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
+import no.runsafe.framework.api.command.ICommandHandler;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.internal.command.ITabExecutor;
@@ -27,9 +28,13 @@ public class HelpCommand extends ExecutableCommand
 		if (commandExecutor instanceof ITabExecutor)
 		{
 			String path = parameters.get("subcommand-path");
+			ICommandHandler handler = ((ITabExecutor) commandExecutor).getHandler();
+			if (handler == null)
+				return "Invalid command.";
 			if (path != null)
-				return "Usage: /" + ((ITabExecutor) commandExecutor).getHandler().getSubCommandUsage(executor, path.split("\\s+"));
-			return "Usage: /" + ((ITabExecutor) commandExecutor).getHandler().getSubCommandUsage(executor);
+				return "Usage: /" + handler.getSubCommandUsage(executor, path.split("\\s+"));
+			String subUsage = handler.getSubCommandUsage(executor);
+			return "Usage: /" + subUsage;
 		}
 
 		return "Usage: " + command.getUsage().replace("<command>", parameters.get("command"));
