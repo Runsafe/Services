@@ -7,12 +7,14 @@ import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.CommandArgumentSpecification;
 import no.runsafe.framework.api.command.argument.ITabComplete;
 import no.runsafe.framework.api.command.argument.IValueExpander;
+import no.runsafe.framework.api.command.argument.IValueProvider;
 import no.runsafe.framework.api.player.IPlayer;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Map;
 
-public class PluginArgument extends CommandArgumentSpecification implements ITabComplete, IValueExpander
+public class PluginArgument extends CommandArgumentSpecification implements ITabComplete, IValueExpander, IValueProvider<Iterable<RunsafePlugin>>
 {
 	public PluginArgument()
 	{
@@ -64,5 +66,11 @@ public class PluginArgument extends CommandArgumentSpecification implements ITab
 			return null;
 
 		return alternatives.get(0).getName();
+	}
+
+	@Override
+	public Iterable<RunsafePlugin> getValue(IPlayer context, Map<String, String> params)
+	{
+		return RunsafePlugin.getPlugins(params.get(name));
 	}
 }

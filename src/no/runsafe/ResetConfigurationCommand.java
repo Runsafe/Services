@@ -1,11 +1,9 @@
 package no.runsafe;
 
 import no.runsafe.framework.RunsafePlugin;
-import no.runsafe.framework.api.IKernel;
+import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.console.ConsoleCommand;
 import no.runsafe.framework.internal.configuration.ConfigurationEngine;
-
-import java.util.Map;
 
 public class ResetConfigurationCommand extends ConsoleCommand
 {
@@ -15,15 +13,20 @@ public class ResetConfigurationCommand extends ConsoleCommand
 	}
 
 	@Override
-	public String OnExecute(Map<String, String> parameters)
+	public String OnExecute(IArgumentList parameters)
 	{
-		IKernel plugin = RunsafePlugin.getPlugin(parameters.get("plugin"));
-		if (plugin == null)
-			return "Invalid plugin specified";
-		ConfigurationEngine engine = plugin.getComponent(ConfigurationEngine.class);
-		if (engine.restoreToDefaults())
-			return String.format("All configuration for the plugin %s has been rolled back to their defaults.", parameters.get("plugin"));
-
-		return "Negative on that, Houston!";
+		StringBuilder response = new StringBuilder();
+		Iterable<RunsafePlugin> plugins = parameters.getValue("plugin");
+		if (plugins == null)
+			return null;
+		for (RunsafePlugin plugin : plugins)
+		{
+			ConfigurationEngine engine = plugin.getComponent(ConfigurationEngine.class);
+			if (engine.restoreToDefaults())
+				response.append(
+					String.format("All configuration for the plugin %s has been rolled back to their defaults.", plugin.getName())
+				);
+		}
+		return response.toString();
 	}
 }

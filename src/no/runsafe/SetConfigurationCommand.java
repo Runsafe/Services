@@ -3,13 +3,12 @@ package no.runsafe;
 import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.framework.api.IConfiguration;
 import no.runsafe.framework.api.IKernel;
+import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.OptionalArgument;
 import no.runsafe.framework.api.command.argument.TrailingArgument;
 import no.runsafe.framework.api.command.console.ConsoleCommand;
 import no.runsafe.framework.internal.configuration.ConfigurationEngine;
 import no.runsafe.framework.text.ChatColour;
-
-import java.util.Map;
 
 public class SetConfigurationCommand extends ConsoleCommand
 {
@@ -22,9 +21,12 @@ public class SetConfigurationCommand extends ConsoleCommand
 	}
 
 	@Override
-	public String OnExecute(Map<String, String> parameters)
+	public String OnExecute(IArgumentList parameters)
 	{
-		IKernel plugin = RunsafePlugin.getPlugin(parameters.get("plugin"));
+		Iterable<RunsafePlugin> plugins = parameters.getValue("plugin");
+		if (plugins == null)
+			return null;
+		RunsafePlugin plugin = plugins.iterator().next();
 		String key = parameters.get("key");
 		String value = parameters.get("value");
 		if (plugin == null)
