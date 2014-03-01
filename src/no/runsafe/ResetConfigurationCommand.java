@@ -15,7 +15,7 @@ public class ResetConfigurationCommand extends ConsoleCommand
 	@Override
 	public String OnExecute(IArgumentList parameters)
 	{
-		StringBuilder response = new StringBuilder();
+		StringBuilder response = new StringBuilder(100);
 		Iterable<RunsafePlugin> plugins = parameters.getValue("plugin");
 		if (plugins == null)
 			return null;

@@ -18,7 +18,7 @@ public class SubCommandArgument extends OptionalArgument implements IContextualT
 {
 	public SubCommandArgument(RunsafePlugin plugin)
 	{
-		super("subcommand-path", null);
+		super("subcommand-path");
 		server = plugin.getServer();
 	}
 

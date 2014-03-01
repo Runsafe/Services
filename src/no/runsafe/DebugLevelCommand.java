@@ -5,7 +5,6 @@ import no.runsafe.framework.api.IKernel;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.Enumeration;
 import no.runsafe.framework.api.command.argument.IArgumentList;
-import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.console.ConsoleCommand;
 import no.runsafe.framework.api.log.IDebug;
 import no.runsafe.framework.internal.log.Debug;
@@ -19,7 +18,7 @@ public class DebugLevelCommand extends ConsoleCommand
 	{
 		super(
 			"debuglevel", "Changes the output debug level for plugins",
-			new RequiredArgument("plugin"), new Enumeration.Required("level", DebugLevel.values())
+			new PluginArgument(), new Enumeration("level", DebugLevel.values()).require()
 		);
 	}
 
@@ -40,11 +39,13 @@ public class DebugLevelCommand extends ConsoleCommand
 		if ("*".equals(pluginName))
 			Debug.Global().setDebugLevel(level);
 
-		for (IKernel plugin : RunsafePlugin.getPlugins(pluginName))
-		{
-			IDebug debugger = plugin.getComponent(IDebug.class);
-			debugger.setDebugLevel(level);
-		}
+		Iterable<RunsafePlugin> plugins = parameters.getValue("plugin");
+		if (plugins != null)
+			for (IKernel plugin : plugins)
+			{
+				IDebug debugger = plugin.getComponent(IDebug.class);
+				debugger.setDebugLevel(level);
+			}
 		return String.format("Set debug level for plugins matching %s to %s", pluginName, level);
 	}
 }
