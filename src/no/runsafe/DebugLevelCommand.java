@@ -34,7 +34,11 @@ public class DebugLevelCommand extends ConsoleCommand
 	public String OnExecute(IArgumentList parameters)
 	{
 		String pluginName = parameters.get("plugin");
-		Level level = parameters.getValue("level");
+		DebugLevel debugLevel = parameters.getValue("level");
+		if (debugLevel == null)
+			return "&cInvalid debug level.";
+
+		Level level = Level.parse(debugLevel.name());
 
 		if ("*".equals(pluginName))
 			Debug.Global().setDebugLevel(level);
