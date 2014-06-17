@@ -12,6 +12,7 @@ public class ServicesPlugin extends RunsafePlugin
 		addComponent(Commands.class);
 
 		addComponent(HelpCommand.class);
+		addComponent(WhatProvidesCommand.class);
 
 		Command command = new Command("runsafe", "Runsafe core services", null);
 
