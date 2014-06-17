@@ -43,7 +43,7 @@ public class WhatProvidesCommand extends ExecutableCommand
 			return "&cNo command found matching '" + command + "'!";
 
 		if (command.equalsIgnoreCase(commandObject.getName()))
-			return "The command '" + commandObject.getName() + "' is provided by '" + commandObject.getPlugin();
+			return "The command '" + commandObject.getName() + "' is provided by '" + commandObject.getPlugin() + '\'';
 
 		else
 			return '\'' + command + "' maps to the command '" + commandObject.getName() + "' which is provided by '" + commandObject.getPlugin() + '\'';
