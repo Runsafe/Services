@@ -11,6 +11,9 @@ commands:
     aliases: [rs]
   help:
     description: Command usage help
+  whatprovides:
+    description: Check what plugin provides a command
+    aliases: [wp]
 
 permissions:
   runsafe.config.reload:
