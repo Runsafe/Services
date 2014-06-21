@@ -23,31 +23,24 @@ public class WhatProvidesCommand extends ExecutableCommand
 		String command = parameters.getRequired("command");
 		PluginCommand commandObject = plugin.getServer().getPluginCommand(command);
 		if (commandObject == null)
-		{
-			Map<String, String[]> aliases = plugin.getServer().getCommandAliases();
-			for (Map.Entry<String, String[]> stringEntry : aliases.entrySet())
-			{
-				for (String alias : stringEntry.getValue())
-				{
-					if (alias != null && alias.equalsIgnoreCase(command))
-					{
-						commandObject = plugin.getServer().getPluginCommand(stringEntry.getKey());
-						break;
-					}
-				}
-				if (commandObject != null)
-					break;
-			}
-		}
+			commandObject = findCommandByAlias(command);
 		if (commandObject == null)
-			return "&cNo command found matching '" + command + "'!";
+			return "&cNo regular command found matching '" + command + "'!";
 
 		if (command.equalsIgnoreCase(commandObject.getName()))
 			return "The command '" + commandObject.getName() + "' is provided by '" + commandObject.getPlugin() + '\'';
-
 		else
 			return '\'' + command + "' maps to the command '" + commandObject.getName() + "' which is provided by '" + commandObject.getPlugin() + '\'';
 
+	}
+
+	private PluginCommand findCommandByAlias(String command)
+	{
+		for (Map.Entry<String, String[]> aliasedCommand : plugin.getServer().getCommandAliases().entrySet())
+			for (String alias : aliasedCommand.getValue())
+				if (alias != null && alias.equalsIgnoreCase(command))
+					return plugin.getServer().getPluginCommand(aliasedCommand.getKey());
+		return null;
 	}
 
 	private final RunsafePlugin plugin;
