@@ -25,13 +25,13 @@ public class WhatProvidesCommand extends ExecutableCommand
 		if (commandObject == null)
 		{
 			Map<String, String[]> aliases = plugin.getServer().getCommandAliases();
-			for (String altcommand : aliases.keySet())
+			for (Map.Entry<String, String[]> stringEntry : aliases.entrySet())
 			{
-				for (String alias : aliases.get(command))
+				for (String alias : stringEntry.getValue())
 				{
 					if (alias != null && alias.equalsIgnoreCase(command))
 					{
-						commandObject = plugin.getServer().getPluginCommand(altcommand);
+						commandObject = plugin.getServer().getPluginCommand(stringEntry.getKey());
 						break;
 					}
 				}
