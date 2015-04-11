@@ -10,6 +10,7 @@ import no.runsafe.framework.api.command.argument.IValueExpander;
 import no.runsafe.framework.api.player.IPlayer;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -35,18 +36,21 @@ public class PluginArgument extends CommandArgumentSpecification<Iterable<Runsaf
 	@Override
 	public List<String> getAlternatives(IPlayer executor, String partial)
 	{
-		List<String> alternates = Lists.transform(
-			RunsafePlugin.getPlugins("*"),
-			new Function<RunsafePlugin, String>()
-			{
-				@Override
-				public String apply(@Nullable RunsafePlugin plugin)
+		ArrayList<String> alternates = new ArrayList<String>();
+		alternates.addAll(
+			Lists.transform(
+				RunsafePlugin.getPlugins("*"),
+				new Function<RunsafePlugin, String>()
 				{
-					if (plugin == null)
-						return null;
-					return plugin.getName();
+					@Override
+					public String apply(@Nullable RunsafePlugin plugin)
+					{
+						if (plugin == null)
+							return null;
+						return plugin.getName();
+					}
 				}
-			}
+			)
 		);
 		alternates.add("*");
 		return alternates;
