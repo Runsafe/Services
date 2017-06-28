@@ -21,13 +21,13 @@ public class HelpCommand extends ExecutableCommand
 	@Override
 	public String OnExecute(ICommandExecutor executor, IArgumentList parameters)
 	{
-		PluginCommand command = plugin.getServer().getPluginCommand(parameters.get("command"));
+		PluginCommand command = plugin.getServer().getPluginCommand(parameters.getRequired("command"));
 		if (command == null)
 			return "No such command exists.";
 		CommandExecutor commandExecutor = command.getExecutor();
 		if (commandExecutor instanceof ITabExecutor)
 		{
-			String path = parameters.get("subcommand-path");
+			String path = parameters.getValue("subcommand-path");
 			ICommandHandler handler = ((ITabExecutor) commandExecutor).getHandler();
 			if (handler == null)
 				return "Invalid command.";
@@ -37,7 +37,7 @@ public class HelpCommand extends ExecutableCommand
 			return "Usage: /" + subUsage;
 		}
 
-		return "Usage: " + command.getUsage().replace("<command>", parameters.get("command"));
+		return "Usage: " + command.getUsage().replace("<command>", parameters.getRequired("command"));
 	}
 
 	private final RunsafePlugin plugin;
