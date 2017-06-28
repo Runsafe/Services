@@ -27,17 +27,17 @@ public class SetConfigurationCommand extends ConsoleCommand
 		if (plugins == null)
 			return null;
 		RunsafePlugin plugin = plugins.iterator().next();
-		String key = parameters.get("key");
-		String value = parameters.get("value");
+		String key = parameters.getValue("key");
+		String value = parameters.getValue("value");
 		if (plugin == null)
 			return "Invalid plugin specified";
 		ConfigurationEngine engine = plugin.getComponent(ConfigurationEngine.class);
 		IConfiguration configuration = engine.getPluginConfiguration();
 		if (configuration == null)
-			return String.format("Could not get configuration object from plugin %s!", parameters.get("plugin"));
+			return String.format("Could not get configuration object from plugin %s!", parameters.getValue("plugin"));
 		if (key == null)
 		{
-			StringBuilder builder = new StringBuilder("Available keys for the plugin " + parameters.get("plugin") + ":\n");
+			StringBuilder builder = new StringBuilder("Available keys for the plugin " + parameters.getValue("plugin") + ":\n");
 			for (String candidateKey : configuration.getConfigurationKeys())
 				builder.append("  ").append(candidateKey).append(" = ").append(ChatColour.Escape(configuration.getConfigValueAsString(candidateKey))).append('\n');
 
@@ -45,14 +45,14 @@ public class SetConfigurationCommand extends ConsoleCommand
 		}
 		String oldValue = configuration.getConfigValueAsString(key);
 		if (oldValue == null)
-			return String.format("The configuration key '%s' does not appear valid for plugin %s.", key, parameters.get("plugin"));
+			return String.format("The configuration key '%s' does not appear valid for plugin %s.", key, parameters.getValue("plugin"));
 
 		if (oldValue.equals(value))
-			return String.format("%s: %s was already set to %s.", parameters.get("plugin"), key, value);
+			return String.format("%s: %s was already set to %s.", parameters.getValue("plugin"), key, value);
 
 		configuration.setConfigValue(key, value);
 		configuration.save();
 		plugin.getComponent(ConfigurationEngine.class).load();
-		return String.format("%s: %s has been changed from %s to %s.", parameters.get("plugin"), key, oldValue, value);
+		return String.format("%s: %s has been changed from %s to %s.", parameters.getValue("plugin"), key, oldValue, value);
 	}
 }

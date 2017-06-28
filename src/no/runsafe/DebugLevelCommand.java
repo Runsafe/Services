@@ -33,7 +33,7 @@ public class DebugLevelCommand extends ConsoleCommand
 	@Override
 	public String OnExecute(IArgumentList parameters)
 	{
-		String pluginName = parameters.get("plugin");
+		String pluginName = parameters.getRequired("plugin");
 		DebugLevel debugLevel = parameters.getValue("level");
 		if (debugLevel == null)
 			return "&cInvalid debug level.";
