@@ -35,13 +35,16 @@ public class SubCommandArgument extends OptionalArgument implements IContextualT
 		CommandExecutor commandExecutor = command.getExecutor();
 		if (commandExecutor instanceof ITabExecutor)
 		{
-			ICommandHandler targetCommand = ((ITabExecutor) commandExecutor).getHandler()
-				.getTargetSubCommand(executor, Arrays.copyOfRange(predecessors, 1, predecessors.length));
+			ICommandHandler handler = ((ITabExecutor) commandExecutor).getHandler();
+			if (handler == null)
+				return Collections.emptyList();
+
+			ICommandHandler targetCommand = handler.getTargetSubCommand(executor, Arrays.copyOfRange(predecessors, 1, predecessors.length));
 			if (targetCommand != null)
 				return targetCommand.getSubCommands(executor);
 		}
 		return Collections.emptyList();
 	}
 
-	Server server;
+	final Server server;
 }

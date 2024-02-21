@@ -29,15 +29,11 @@ public class DebugLevelCommand extends ConsoleCommand
 		return " *|<plugin> OFF|SEVERE|WARNING|INFO|CONFIG|FINE|FINER|FINEST|ALL";
 	}
 
-	@SuppressWarnings("StringToUpperCaseOrToLowerCaseWithoutLocale")
 	@Override
 	public String OnExecute(IArgumentList parameters)
 	{
-		String pluginName = parameters.get("plugin");
-		DebugLevel debugLevel = parameters.getValue("level");
-		if (debugLevel == null)
-			return "&cInvalid debug level.";
-
+		String pluginName = parameters.getRequired("plugin");
+		DebugLevel debugLevel = parameters.getRequired("level");
 		Level level = Level.parse(debugLevel.name());
 
 		if ("*".equals(pluginName))

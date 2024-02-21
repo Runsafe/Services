@@ -2,7 +2,6 @@ package no.runsafe;
 
 import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.framework.api.IConfiguration;
-import no.runsafe.framework.api.IKernel;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.OptionalArgument;
 import no.runsafe.framework.api.command.argument.TrailingArgument;

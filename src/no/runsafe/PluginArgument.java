@@ -1,6 +1,5 @@
 package no.runsafe;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.framework.api.command.ICommandExecutor;
@@ -36,19 +35,14 @@ public class PluginArgument extends CommandArgumentSpecification<Iterable<Runsaf
 	@Override
 	public List<String> getAlternatives(IPlayer executor, String partial)
 	{
-		ArrayList<String> alternates = new ArrayList<String>();
+		ArrayList<String> alternates = new ArrayList<>();
 		alternates.addAll(
 			Lists.transform(
 				RunsafePlugin.getPlugins("*"),
-				new Function<RunsafePlugin, String>()
-				{
-					@Override
-					public String apply(@Nullable RunsafePlugin plugin)
-					{
-						if (plugin == null)
-							return null;
-						return plugin.getName();
-					}
+				plugin -> {
+					if (plugin == null)
+						return null;
+					return plugin.getName();
 				}
 			)
 		);
