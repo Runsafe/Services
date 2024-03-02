@@ -32,20 +32,19 @@ public class DebugLevelCommand extends ConsoleCommand
 	@Override
 	public String OnExecute(IArgumentList parameters)
 	{
-		String pluginName = parameters.getRequired("plugin");
+		String pluginName = parameters.getRaw("plugin");
 		DebugLevel debugLevel = parameters.getRequired("level");
 		Level level = Level.parse(debugLevel.name());
 
 		if ("*".equals(pluginName))
 			Debug.Global().setDebugLevel(level);
 
-		Iterable<RunsafePlugin> plugins = parameters.getValue("plugin");
-		if (plugins != null)
-			for (IKernel plugin : plugins)
-			{
-				IDebug debugger = plugin.getComponent(IDebug.class);
-				debugger.setDebugLevel(level);
-			}
+		Iterable<RunsafePlugin> plugins = parameters.getRequired("plugin");
+		for (IKernel plugin : plugins)
+		{
+			IDebug debugger = plugin.getComponent(IDebug.class);
+			debugger.setDebugLevel(level);
+		}
 		return String.format("Set debug level for plugins matching %s to %s", pluginName, level);
 	}
 }
